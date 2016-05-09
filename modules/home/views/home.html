@@ -1,0 +1,258 @@
+﻿<div class="home" ng-controller="HomeController as home">
+<div class="page-left">
+    <ul>
+        <li ng-click="home.tab = 1"><i class="fa fa-user"></i> Управление клиентами</li>
+        <li ng-click="home.tab = 2"><i class="fa fa-car"></i> Управление машинами</li>
+        <li ng-click="home.tab = 3"><i class="fa fa-calculator"></i> Управление услугами</li>
+        <li ng-click="home.tab = 4"><i class="fa fa-shopping-cart"></i> Управление заказами</li>
+        <li><a href="#/login"><i class="fa fa-close"></i> Выход</a></li>
+    </ul>
+</div>
+<div class="page-right">
+    <div class="page-line"></div>
+    <div class="page-top">
+        <div class="container">
+            <h1 class="page-title">Сервис онлайн управления станцией технического обслуживания</h1>
+        </div>
+    </div>
+    <div class="page-content" ng-show="home.tab == 2">
+        <div class="table-area">
+            <span class="table-logo">Управление машинами</span>
+            <div class="table-content">
+                <table>
+                    <tr>
+                        <th>Идентификатор</th>
+                        <th>Номер машины</th>
+                        <th>Марка</th>
+                        <th>Модель</th>
+                        <th>Год</th>
+                        <th>Цвет</th>
+                        <th>Класс</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr class="table-inputs">
+                        <td>
+                            <input type="text" ng-model="car.id">
+                        </td>
+                        <td>
+                            <input type="text" ng-model="car.car_number">
+                        </td>
+                        <td>
+                            <input type="text" ng-model="car.mark">
+                        </td>
+                        <td>
+                            <input type="text" ng-model="car.model">
+                        </td>
+                        <td>
+                            <input type="text" ng-model="car.year">
+                        </td>
+                        <td>
+                            <input type="text" ng-model="car.color">
+                        </td>
+                        <td>
+                            <input type="text" ng-model="car.class">
+                        </td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr ng-repeat="car in home.cars | filter:car">
+                        <td>{{car.id}}</td>
+                        <td>{{car.car_number}}</td>
+                        <td>{{car.mark}}</td>
+                        <td>{{car.model}}</td>
+                        <td>{{car.year}}</td>
+                        <td>{{car.color}}</td>
+                        <td>{{car.class}}</td>
+                        <td><span class="table-button table-button-blue" ng-click="home.delete_car(car.id)">Удалить</span></td>
+                        <td>
+                            <span class="table-button table-button-green" ng-click="home.modal = car.id">Подробнее</span>
+                            <div class="modal-fade" ng-show="home.modal == {{car.id}}">
+                                <div class="modal">
+                                    <ul>
+                                        <li><b>Идентификатор:</b> {{car.id}}</li>
+                                        <li><b>Номер машины:</b> {{car.number}}</li>
+                                        <li><b>Марка:</b> {{car.mark}}</li>
+                                        <li><b>Модель:</b> {{car.model}}</li>
+                                        <li><b>Год:</b> {{car.year}}</li>
+                                        <li><b>Цвет:</b> {{car.color}}</li>
+                                        <li><b>Класс</b> {{car.class}}</li>
+                                        <li><b>Объем двигателя:</b> {{car.volume}}</li>
+                                        <li><b>Тип Трансмиссии:</b> {{car.transmission}}</li>
+                                        <li><b>Тип Топлива:</b> {{car.t_type}}</li>
+                                    </ul>
+                                    <i class="fa fa-close" ng-click="home.modal = false"></i>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="page-content" ng-show="home.tab == 1">
+        <div class="table-area">
+            <span class="table-logo">Управление клиентами</span>
+            <div class="table-content">
+                <table>
+                    <tr>
+                        <th>Идентификатор</th>
+                        <th>ФИО</th>
+                        <th>Логин</th>
+                        <th>Пароль</th>
+                        <th>Номер пасспорта</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr class="table-inputs">
+                        <td>
+                            <input type="text" ng-model="user.id">
+                        </td>
+                        <td>
+                            <input type="text" ng-model="user.fio">
+                        </td>
+                        <td>
+                            <input type="text" ng-model="user.login">
+                        </td>
+                        <td>
+                            <input type="text" ng-model="user.password">
+                        </td>
+                        <td>
+                            <input type="text" ng-model="user.passport">
+                        </td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr ng-repeat="user in home.users | filter:user">
+                        <td>{{user.id}}</td>
+                        <td>{{user.fio}}</td>
+                        <td>{{user.login}}</td>
+                        <td>{{user.password}}</td>
+                        <td>{{user.passport}}</td>
+                        <td><span class="table-button table-button-blue" ng-click="home.delete_user(user.id)">Удалить</span></td>
+                        <td>
+                            <span class="table-button table-button-green" ng-click="home.modal = user.id">Подробнее</span>
+                            <div class="modal-fade" ng-show="home.modal == {{user.id}}">
+                                <div class="modal">
+                                    <ul>
+                                        <li><b>Идентификатор: </b>{{user.id}}</li>
+                                        <li><b>ФИО:  </b>{{user.fio}}</li>
+                                        <li><b>Логин: </b>{{user.login}}</li>
+                                        <li><b>Пароль: </b>{{user.password}}</li>
+                                        <li><b>Номер пасспорта: </b>{{user.passport}}</li>
+                                    </ul>
+                                    <i class="fa fa-close" ng-click="home.modal = false"></i>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="page-content" ng-show="home.tab == 3">
+        <div class="table-area">
+            <span class="table-logo">Управление услугами</span>
+            <div class="table-content">
+                <table>
+                    <tr>
+                        <th>Идентификатор</th>
+                        <th>Услуга</th>
+                        <th>Цена</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr class="table-inputs">
+                        <td>
+                            <input type="text" ng-model="service.id">
+                        </td>
+                        <td>
+                            <input type="text" ng-model="service.name">
+                        </td>
+                        <td>
+                            <input type="text" ng-model="service.price">
+                        </td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr ng-repeat="service in home.service | filter:service">
+                        <td>{{service.id}}</td>
+                        <td>{{service.name}}</td>
+                        <td>{{service.price}}</td>
+                        <td><span class="table-button table-button-blue" ng-click="home.delete_service(service.id)">Удалить</span></td>
+                        <td>
+                            <span class="table-button table-button-green" ng-click="home.modal = service.id">Подробнее</span>
+                            <div class="modal-fade" ng-show="home.modal == {{service.id}}">
+                                <div class="modal">
+                                    <ul>
+                                        <li><b>Идентификатор:</b> {{service.id}}</li>
+                                        <li><b>Название услуги:</b> {{service.name}}</li>
+                                        <li><b>Цена услуги:</b> {{service.price}}</li>
+                                        <li><b>Описание:</b> {{service.description}}</li>
+                                    </ul>
+                                    <i class="fa fa-close" ng-click="home.modal = false"></i>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <div class="add-form">
+                    <table>
+                        <tr>
+                            <th><span class="add-form-logo">Добавить услугу</span></th>
+                        </tr>
+                        <tr>
+                            <td class="table-add">
+                                <form>
+                                    <input type="text" placeholder="Название услуги" ng-model="home.add_service_name">
+                                    <input type="text" placeholder="Цена услуги" ng-model="home.add_service_price">
+                                    <input type="text" placeholder="Описание услуги" ng-model="home.add_service_description">
+                                    <input type="submit" value="Добавить" ng-click="home.add_service();">
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-content" ng-show="home.tab == 4">
+        <div class="table-area">
+            <span class="table-logo">Управление заказами</span>
+            <div class="table-content">
+                <table>
+                    <tr>
+                        <th>Идентификатор</th>
+                        <th>Номер машины</th>
+                        <th>ФИО Клиента</th>
+                        <th>Взятая услуга</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" ng-model="order.id">
+                        </td>
+                        <td>
+                            <input type="text" ng-model="order.car">
+                        </td>
+                        <td>
+                            <input type="text" ng-model="order.client">
+                        </td>
+                        <td>
+                            <input type="text" ng-model="order.service">
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr ng-repeat="order in home.orders | filter:order">
+                        <td>{{order.id}}</td>
+                        <td>{{order.car}}</td>
+                        <td>{{order.client}}</td>
+                        <td>{{order.service}}</td>
+                        <td><span class="table-button table-button-blue" ng-click="home.delete_order(order.id)">Удалить</span></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

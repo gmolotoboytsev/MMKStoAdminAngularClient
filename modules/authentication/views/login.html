@@ -1,0 +1,17 @@
+﻿<div class="login-form">
+    <span class="login-logo">Авторизация</span>
+    <span class="login-description">Администрирование СТО</span>
+    <div ng-show="error" class="login-error">{{error}}</div>
+    <form name="form" ng-submit="login()" role="form">
+        <div class="login-area">
+            <span class="label">Ваш логин</span>
+            <input ng-model="username" required type="text" placeholder="Логин">
+        </div>
+        <div class="login-area">
+            <span class="label">Ваш пароль</span>
+            <input ng-model="password" required type="password" placeholder="Пароль">
+        </div>
+        <input type="submit" value="Авторизация">
+    </form>
+    
+</div>
